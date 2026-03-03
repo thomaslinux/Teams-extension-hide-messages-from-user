@@ -1,0 +1,26 @@
+a manifest v3 extension based on this code :
+
+const hideUsers = ["USER1", "USER2"];
+
+window.addEventListener("load", () => {
+  console.log("Hide users:", hideUsers);
+
+
+  // Build the CSS selector from hideUsers
+  const selector = hideUsers
+    .map(
+      (u) =>
+        `div[class*="fui-ChatMessage"]:has(img[src*="${u}"]) div[data-message-content]`,
+    )
+    .join(",\n");
+
+
+create a <style id="hideUsers"></style>
+
+options :
+- add / remove a user to the list of users to hide (Enter or click on add to add the user)
+- enable disable hiding of that user (checkbox) 
+- toggle between hide message content only or hide message. hide message uses this line :
+         `div[class*="fui-ChatMessage"]:has(img[src*="${u}"])`,
+
+if the function is too long, extract a part of it in a separate function.

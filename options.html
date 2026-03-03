@@ -2,20 +2,27 @@
 <html>
 
 <head>
-    <title>Hide Chat Users Options</title>
+    <title>Hide Users</title>
+    <link rel="stylesheet" href="popup.css" />
 </head>
 
 <body>
-    <h1>Users to hide</h1>
-    <label style="display:none">
-        <input type="checkbox" id="toggleEnable" />
-        Enable hiding globally
-    </label>
-    <ul id="userList"></ul>
-    <label for="newUser">FAMILYNAME of user</label>
-    <input id="newUser" placeholder="FAMILYNAME" />
-    <button id="addBtn">Add</button>
+    <h3>Hide Chat Users</h3>
+    <div>
+        <label>
+            <input type="radio" name="mode" value="content" checked /> Hide content only
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="mode" value="message" /> Hide entire message
+        </label>
+    </div>
 
+    <ul id="userList"></ul>
+    <div>
+        <input id="userInput" placeholder="Enter user name..." />
+        <button id="addUser">Add</button>
+    </div>
     <script src="options.js"></script>
 </body>
 

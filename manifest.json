@@ -5,9 +5,6 @@
   "description": "Hide messages from selected users.",
   "permissions": ["storage", "scripting", "activeTab"],
   "host_permissions": ["https://teams.cloud.microsoft/*"],
-  "background": {
-    "service_worker": "background.js"
-  },
   "action": {
     "default_title": "Hide Chat Users",
     "default_popup": "options.html"
@@ -17,6 +14,5 @@
       "matches": ["https://teams.cloud.microsoft/*"],
       "js": ["content.js"]
     }
-  ],
-  "options_page": "options.html"
+  ]
 }
