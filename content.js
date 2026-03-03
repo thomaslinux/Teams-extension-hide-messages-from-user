@@ -2,9 +2,14 @@ let styleEl;
 
 function updateCSS(hideUsers, enabled) {
   if (styleEl) styleEl.remove();
-  if (!enabled || !hideUsers.length) return;
+  if (!enabled) return;
 
-  const selector = hideUsers
+  const activeUsers = (hideUsers || [])
+    .filter((u) => u.hidden)
+    .map((u) => u.name);
+  if (!activeUsers.length) return;
+
+  const selector = activeUsers
     .map(
       (u) =>
         `div[class*="fui-ChatMessage"]:has(img[src*="${u}"]) div[data-message-content]`,
@@ -16,7 +21,6 @@ function updateCSS(hideUsers, enabled) {
   document.head.appendChild(styleEl);
 }
 
-// Load initial state
 chrome.runtime.sendMessage(
   { type: "getHideUsers" },
   ({ hideUsers, enabled }) => {
@@ -24,16 +28,11 @@ chrome.runtime.sendMessage(
   },
 );
 
-// Watch for updates
-chrome.storage.onChanged.addListener((changes) => {
-  const hideUsers = changes.hideUsers?.newValue;
-  const enabled = changes.enabled?.newValue;
-  if (hideUsers !== undefined || enabled !== undefined) {
-    chrome.storage.sync.get(
-      ["hideUsers", "enabled"],
-      ({ hideUsers, enabled }) => {
-        updateCSS(hideUsers, enabled);
-      },
-    );
-  }
+chrome.storage.onChanged.addListener(() => {
+  chrome.storage.sync.get(
+    ["hideUsers", "enabled"],
+    ({ hideUsers, enabled }) => {
+      updateCSS(hideUsers, enabled);
+    },
+  );
 });
