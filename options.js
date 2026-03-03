@@ -1,3 +1,7 @@
+if (typeof browser === "undefined") {
+  var browser = chrome;
+}
+
 const userListEl = document.getElementById("userList");
 const toggleEl = document.getElementById("toggleEnable");
 const newUserEl = document.getElementById("newUser");
@@ -5,7 +9,7 @@ const addBtn = document.getElementById("addBtn");
 
 function renderList(users) {
   userListEl.innerHTML = "";
-  users.forEach((user) => {
+  (users || []).forEach((user) => {
     const li = document.createElement("li");
 
     const chk = document.createElement("input");
@@ -27,47 +31,48 @@ function renderList(users) {
   });
 }
 
-function loadSettings() {
-  chrome.storage.sync.get(
-    ["hideUsers", "enabled"],
-    ({ hideUsers, enabled }) => {
-      renderList(hideUsers || []);
-      toggleEl.checked = enabled ?? true;
-    },
+async function loadSettings() {
+  const { hideUsers = [], enabled = true } = await browser.storage.sync.get([
+    "hideUsers",
+    "enabled",
+  ]);
+  renderList(hideUsers);
+  toggleEl.checked = enabled;
+}
+
+async function toggleUser(name, hidden) {
+  const { hideUsers = [] } = await browser.storage.sync.get("hideUsers");
+  const updated = hideUsers.map((u) =>
+    u.name === name ? { ...u, hidden } : u,
   );
+  await browser.storage.sync.set({ hideUsers: updated });
+  renderList(updated);
 }
 
-function toggleUser(name, hidden) {
-  chrome.storage.sync.get("hideUsers", ({ hideUsers }) => {
-    const updated = hideUsers.map((u) =>
-      u.name === name ? { ...u, hidden } : u,
-    );
-    chrome.storage.sync.set({ hideUsers: updated });
-    renderList(updated);
-  });
+async function removeUser(name) {
+  const { hideUsers = [] } = await browser.storage.sync.get("hideUsers");
+  const updated = hideUsers.filter((u) => u.name !== name);
+  await browser.storage.sync.set({ hideUsers: updated });
+  renderList(updated);
 }
 
-function removeUser(name) {
-  chrome.storage.sync.get("hideUsers", ({ hideUsers }) => {
-    const updated = hideUsers.filter((u) => u.name !== name);
-    chrome.storage.sync.set({ hideUsers: updated });
-    renderList(updated);
-  });
-}
-
-addBtn.onclick = () => {
+addBtn.onclick = async () => {
   const newUser = newUserEl.value.trim();
   if (!newUser) return;
-  chrome.storage.sync.get("hideUsers", ({ hideUsers }) => {
-    const updated = [...(hideUsers || []), { name: newUser, hidden: true }];
-    chrome.storage.sync.set({ hideUsers: updated });
-    renderList(updated);
+  const { hideUsers = [] } = await browser.storage.sync.get("hideUsers");
+  // Avoid duplicates
+  if (hideUsers.some((u) => u.name === newUser)) {
     newUserEl.value = "";
-  });
+    return;
+  }
+  const updated = [...hideUsers, { name: newUser, hidden: true }];
+  await browser.storage.sync.set({ hideUsers: updated });
+  renderList(updated);
+  newUserEl.value = "";
 };
 
-toggleEl.onchange = () => {
-  chrome.storage.sync.set({ enabled: toggleEl.checked });
+toggleEl.onchange = async () => {
+  await browser.storage.sync.set({ enabled: toggleEl.checked });
 };
 
 loadSettings();
