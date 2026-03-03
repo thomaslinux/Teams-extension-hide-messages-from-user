@@ -4,7 +4,7 @@ A chrome extension to hide messages from Teams users. Download zip and load in c
 
 ## Installation on Chrome
 
-Clone the repository or download the zip.
+Clone the repository or [download the zip](https://github.com/thomaslinux/teams-hide-message-from-user-mv3/archive/refs/heads/main.zip).
 
 Go to this adress :
 
