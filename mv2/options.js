@@ -10,8 +10,8 @@ function renderTable() {
   hideUsers.forEach((u, i) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>${u.name}</td>
-      <td><input type="checkbox" data-index="${i}" ${u.enabled ? "checked" : ""}></td>
+      <td><label for="${i}">${u.name}</label></td>
+      <td><input type="checkbox" id="${i}" data-index="${i}" ${u.enabled ? "checked" : ""}></td>
       <td><button data-remove="${i}">Remove</button></td>
     `;
     usersTable.appendChild(row);
