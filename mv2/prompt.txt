@@ -1,4 +1,4 @@
-manifest v2 extension based on this code :
+firefox manifest v2 extension based on this working userscript :
 
 const hideUsers = ["USER1", "USER2"];
 
