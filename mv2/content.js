@@ -3,15 +3,15 @@ const styleId = "hideUsersStyle";
 function applyHideUsersSettings() {
   chrome.storage.sync.get(["hideUsers", "mode", "enabled"], (data) => {
     const { hideUsers = [], mode = "content", enabled = true } = data;
-    let style = document.getElementById(styleId);
 
+    let style = document.getElementById(styleId);
     if (!style) {
       style = document.createElement("style");
       style.id = styleId;
-      document.head.appendChild(style);
+      (document.head || document.documentElement).appendChild(style);
     }
 
-    if (!enabled) {
+    if (!enabled || !hideUsers.length) {
       style.textContent = "";
       return;
     }
@@ -30,5 +30,13 @@ function applyHideUsersSettings() {
   });
 }
 
-window.addEventListener("load", applyHideUsersSettings);
+function initHideUsers() {
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", applyHideUsersSettings);
+  } else {
+    applyHideUsersSettings();
+  }
+}
+
+initHideUsers();
 chrome.storage.onChanged.addListener(applyHideUsersSettings);
