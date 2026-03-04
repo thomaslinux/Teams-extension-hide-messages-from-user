@@ -2,46 +2,49 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
     <title>Hide Users Settings</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
+            font-family: sans-serif;
+            margin: 1em;
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 0.5em;
         }
 
         th,
         td {
-            border: 1px solid #ddd;
-            padding: 8px;
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            text-align: left;
         }
 
-        input {
-            margin-right: 8px;
+        input[type="text"] {
+            width: 200px;
         }
     </style>
 </head>
 
 <body>
-    <h2>Hide Users Configuration</h2>
-    <div>
-        <input type="text" id="username" placeholder="Enter username" />
-        <button id="addUser">Add</button>
-        <label><input type="checkbox" id="masterEnable"> Enable hiding</label>
-        <label>
-            <input type="radio" name="mode" value="content" checked> Hide content only
-        </label>
-        <label>
-            <input type="radio" name="mode" value="message"> Hide entire message
-        </label>
-    </div>
+    <h2>Hide Users Extension</h2>
+    <label><input type="checkbox" id="enabled"> Enable Hiding</label><br>
+    <label>
+        Mode:
+        <select id="mode">
+            <option value="content">Hide Content</option>
+            <option value="message">Hide Whole Message</option>
+        </select>
+    </label>
 
-    <table id="usersTable">
+    <h3>Users</h3>
+    <input type="text" id="userInput" placeholder="Enter user name">
+    <button id="addUser">Add</button>
+
+    <table id="userTable">
         <thead>
             <tr>
                 <th>Family Name</th>

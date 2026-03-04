@@ -1,0 +1,43 @@
+Build a Firefox WebExtension (Manifest V2) that:
+
+
+Uses options.html as the popup (browser_action.default_popup).
+
+
+Lets me manage a list of users (add with Enter or button, list in a table with: FAMILYNAME, Hide checkbox, Remove button).
+
+
+Stores settings in browser.storage.sync as:
+{
+  enabled: boolean,              // global toggle
+  mode: "content" | "message",   // hide content vs whole message
+  users: { name: string, enabled: boolean }[]
+}
+
+
+
+Injects a <style id="hideUsers"> from a content script that:
+
+
+On load and when storage changes, reads settings.
+
+
+If enabled is true, builds a single CSS rule combining all users with enabled = true:
+
+
+mode = "content":
+div[class*="fui-ChatMessage"]:has(img[src*="<USER>"]) div[data-message-content]
+
+
+mode = "message":
+div[class*="fui-ChatMessage"]:has(img[src*="<USER>"])
+
+
+
+
+Appends the style to document.head (or document.documentElement).
+
+
+
+
+Produce four complete files: manifest.json, content.js, options.html, options.js, ready to copy-paste.
