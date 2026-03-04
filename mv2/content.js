@@ -1,41 +1,35 @@
-(async function () {
-  const STYLE_ID = "hideUsers";
+function buildSelector(userList, hideEntireMessage) {
+  return userList
+    .filter((u) => u.enabled)
+    .map((u) => {
+      const selector = hideEntireMessage
+        ? `div[class*="fui-ChatMessage"]:has(img[src*="${u.name}"])`
+        : `div[class*="fui-ChatMessage"]:has(img[src*="${u.name}"]) div[data-message-content]`;
+      return selector;
+    })
+    .join(",\\n");
+}
 
-  async function getSettings() {
-    const defaults = { enabled: true, mode: "content", users: [] };
-    const data = await browser.storage.sync.get(defaults);
-    return Object.assign(defaults, data);
+function applyHideCSS(userList, hideEntireMessage) {
+  let styleTag = document.getElementById("hideUsers");
+  if (!styleTag) {
+    styleTag = document.createElement("style");
+    styleTag.id = "hideUsers";
+    document.head.appendChild(styleTag);
   }
+  const selector = buildSelector(userList, hideEntireMessage);
+  styleTag.textContent = selector
+    ? `${selector} { display: none !important; }`
+    : "";
+}
 
-  function buildCSS(settings) {
-    if (!settings.enabled) return "";
+function loadStateAndApply() {
+  browser.storage.local.get(["hideUsersList", "hideEntireMessage"], (res) => {
+    const users = res.hideUsersList || [];
+    const hideEntire = res.hideEntireMessage || false;
+    applyHideCSS(users, hideEntire);
+  });
+}
 
-    const enabledUsers = settings.users.filter((u) => u.enabled);
-    if (enabledUsers.length === 0) return "";
-
-    const selectors = enabledUsers.map((u) => {
-      const match = `img[src*="${u.name}"]`;
-      if (settings.mode === "content") {
-        return `div[class*="fui-ChatMessage"]:has(${match}) div[data-message-content]`;
-      } else {
-        return `div[class*="fui-ChatMessage"]:has(${match})`;
-      }
-    });
-
-    return `${selectors.join(", ")} { display: none !important; }`;
-  }
-
-  async function applyCSS() {
-    const settings = await getSettings();
-    let styleEl = document.getElementById(STYLE_ID);
-    if (!styleEl) {
-      styleEl = document.createElement("style");
-      styleEl.id = STYLE_ID;
-      (document.head || document.documentElement).appendChild(styleEl);
-    }
-    styleEl.textContent = buildCSS(settings);
-  }
-
-  browser.storage.onChanged.addListener(applyCSS);
-  await applyCSS();
-})();
+window.addEventListener("load", loadStateAndApply);
+browser.storage.onChanged.addListener(loadStateAndApply);

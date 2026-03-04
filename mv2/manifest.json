@@ -1,16 +1,16 @@
 {
   "manifest_version": 2,
-  "name": "Hide Chat Users",
+  "name": "Hide Specific Users",
   "version": "1.0",
-  "description": "Hide chat messages or contents from selected users.",
-  "permissions": ["storage"],
+  "description": "Hide messages from specific users in chat.",
+  "permissions": ["storage", "activeTab"],
   "browser_action": {
-    "default_title": "Hide Chat Users",
-    "default_popup": "options.html"
+    "default_popup": "options.html",
+    "default_title": "Hide Users"
   },
   "content_scripts": [
     {
-      "matches": ["https://teams.cloud.microsoft/*"],
+      "matches": ["*://*/*"],
       "js": ["content.js"],
       "run_at": "document_end"
     }

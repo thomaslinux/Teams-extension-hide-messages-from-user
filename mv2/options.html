@@ -2,49 +2,35 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Hide Users Settings</title>
+    <meta charset="utf-8" />
+    <title>Hide Users</title>
+    <script defer src="options.js"></script>
     <style>
-        body {
-            font-family: sans-serif;
-            margin: 1em;
-        }
-
         table {
-            border-collapse: collapse;
             width: 100%;
-            margin-top: 0.5em;
+            border-collapse: collapse;
         }
 
         th,
         td {
-            border: 1px solid #ccc;
-            padding: 4px 8px;
-            text-align: left;
+            border-bottom: 1px solid #ddd;
+            padding: 4px;
         }
 
         input[type="text"] {
-            width: 200px;
+            width: 80%;
         }
     </style>
 </head>
 
 <body>
-    <h2>Hide Users Extension</h2>
-    <label><input type="checkbox" id="enabled"> Enable Hiding</label><br>
-    <label>
-        Mode:
-        <select id="mode">
-            <option value="content">Hide Content</option>
-            <option value="message">Hide Whole Message</option>
-        </select>
-    </label>
-
-    <h3>Users</h3>
-    <input type="text" id="userInput" placeholder="Enter user name">
+    <h3>Hide Users</h3>
+    <input id="userInput" type="text" placeholder="Add user..." />
     <button id="addUser">Add</button>
 
-    <table id="userTable">
+    <label><input type="checkbox" id="hideEntire" /> Hide whole message</label>
+
+    <table id="usersTable">
         <thead>
             <tr>
                 <th>Family Name</th>
@@ -54,8 +40,6 @@
         </thead>
         <tbody></tbody>
     </table>
-
-    <script src="options.js"></script>
 </body>
 
 </html>

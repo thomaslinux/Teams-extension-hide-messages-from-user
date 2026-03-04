@@ -1,74 +1,72 @@
-document.addEventListener("DOMContentLoaded", init);
+const userInput = document.getElementById("userInput");
+const addBtn = document.getElementById("addUser");
+const tableBody = document.querySelector("#usersTable tbody");
+const hideEntireBox = document.getElementById("hideEntire");
 
-async function init() {
-  const defaults = { enabled: true, mode: "content", users: [] };
-  const settings = Object.assign(
-    defaults,
-    await browser.storage.sync.get(defaults),
+function renderTable(users) {
+  tableBody.innerHTML = "";
+  users.forEach((u, i) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${u.name}</td>
+      <td><input type="checkbox" class="enable" data-index="${i}" ${u.enabled ? "checked" : ""}></td>
+      <td><button class="remove" data-index="${i}">X</button></td>`;
+    tableBody.appendChild(row);
+  });
+}
+
+function loadState() {
+  browser.storage.local.get(
+    ["hideUsersList", "hideEntireMessage"],
+    ({ hideUsersList = [], hideEntireMessage = false }) => {
+      renderTable(hideUsersList);
+      hideEntireBox.checked = hideEntireMessage;
+    },
   );
+}
 
-  const enabledCheckbox = document.getElementById("enabled");
-  const modeSelect = document.getElementById("mode");
-  const userInput = document.getElementById("userInput");
-  const addUserButton = document.getElementById("addUser");
-  const userTableBody = document.querySelector("#userTable tbody");
+function saveUsers(users) {
+  browser.storage.local.set({ hideUsersList: users });
+}
 
-  enabledCheckbox.checked = settings.enabled;
-  modeSelect.value = settings.mode;
+function addUser() {
+  const name = userInput.value.trim();
+  if (!name) return;
+  browser.storage.local.get("hideUsersList", ({ hideUsersList = [] }) => {
+    hideUsersList.push({ name, enabled: true });
+    saveUsers(hideUsersList);
+    renderTable(hideUsersList);
+  });
+  userInput.value = "";
+}
 
-  function renderUsers() {
-    userTableBody.innerHTML = "";
-    settings.users.forEach((user, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${user.name}</td>
-        <td><input type="checkbox" ${user.enabled ? "checked" : ""}></td>
-        <td><button>Remove</button></td>
-      `;
-      const [hideCb, removeBtn] = row.querySelectorAll("input, button");
+addBtn.addEventListener("click", addUser);
+userInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") addUser();
+});
+hideEntireBox.addEventListener("change", (e) =>
+  browser.storage.local.set({ hideEntireMessage: e.target.checked }),
+);
 
-      hideCb.addEventListener("change", async () => {
-        user.enabled = hideCb.checked;
-        await saveSettings();
-      });
-
-      removeBtn.addEventListener("click", async () => {
-        settings.users.splice(index, 1);
-        await saveSettings();
-        renderUsers();
-      });
-
-      userTableBody.appendChild(row);
+tableBody.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove")) {
+    const index = +e.target.dataset.index;
+    browser.storage.local.get("hideUsersList", ({ hideUsersList = [] }) => {
+      hideUsersList.splice(index, 1);
+      saveUsers(hideUsersList);
+      renderTable(hideUsersList);
     });
   }
+});
 
-  async function saveSettings() {
-    await browser.storage.sync.set(settings);
+tableBody.addEventListener("change", (e) => {
+  if (e.target.classList.contains("enable")) {
+    const index = +e.target.dataset.index;
+    browser.storage.local.get("hideUsersList", ({ hideUsersList = [] }) => {
+      hideUsersList[index].enabled = e.target.checked;
+      saveUsers(hideUsersList);
+    });
   }
+});
 
-  addUserButton.addEventListener("click", async () => {
-    const name = userInput.value.trim();
-    if (name && !settings.users.find((u) => u.name === name)) {
-      settings.users.push({ name, enabled: true });
-      userInput.value = "";
-      await saveSettings();
-      renderUsers();
-    }
-  });
-
-  userInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") addUserButton.click();
-  });
-
-  enabledCheckbox.addEventListener("change", async () => {
-    settings.enabled = enabledCheckbox.checked;
-    await saveSettings();
-  });
-
-  modeSelect.addEventListener("change", async () => {
-    settings.mode = modeSelect.value;
-    await saveSettings();
-  });
-
-  renderUsers();
-}
+document.addEventListener("DOMContentLoaded", loadState);
