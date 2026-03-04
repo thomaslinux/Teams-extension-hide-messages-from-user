@@ -1,15 +1,19 @@
 const DEFAULT_BACKGROUNDS = [
   {
+    url: "none",
+    active: true,
+  },
+  {
+    url: "https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280",
+    active: false,
+  },
+  {
     url: "https://unsplash.com/photos/m35LirqP6y8/download?&h=1280",
     active: false,
   },
   {
     url: "https://unsplash.com/photos/OVO8nK-7Rfs/download?&h=1280",
     active: false,
-  },
-  {
-    url: "https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280",
-    active: true,
   },
   {
     url: "https://unsplash.com/photos/2dp1Ud5gG2A/download?&h=1280",
