@@ -59,9 +59,18 @@
     </div>
 
     <div>
+        <strong>My Messages:</strong><br>
         <label>
-            <input type="checkbox" id="hideMyMessages" />
+            <input type="radio" name="myMessagesMode" value="none" checked>
+            Normal (show all)
+        </label><br>
+        <label>
+            <input type="radio" name="myMessagesMode" value="hide">
             Hide all my messages
+        </label><br>
+        <label>
+            <input type="radio" name="myMessagesMode" value="only">
+            Show only my messages
         </label>
     </div>
 

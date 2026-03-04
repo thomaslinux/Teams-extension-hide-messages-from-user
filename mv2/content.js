@@ -1,6 +1,6 @@
 let hideUsers = [];
 let hideMode = "content";
-let hideMyMessages = false;
+let myMessagesMode = "none";
 let bgUrl = "";
 
 function buildSelector() {
@@ -13,8 +13,12 @@ function buildSelector() {
     .filter((u) => u.enabled)
     .map((u) => base.replace("{{u}}", u.name));
 
-  if (hideMyMessages) {
+  if (myMessagesMode === "hide") {
     selectors.push(`div[class*="fui-ChatMyMessage"]`);
+  } else if (myMessagesMode === "only") {
+    selectors.push(
+      `div[class*="fui-ChatMessage"]:not([class*="fui-ChatMyMessage"])`,
+    );
   }
 
   return selectors.join(",\n");
@@ -46,11 +50,11 @@ function applyCSS() {
 }
 
 browser.storage.local
-  .get(["hideUsers", "hideMode", "hideMyMessages", "bgUrl"])
+  .get(["hideUsers", "hideMode", "myMessagesMode", "bgUrl"])
   .then((res) => {
     hideUsers = res.hideUsers || [];
     hideMode = res.hideMode || "content";
-    hideMyMessages = res.hideMyMessages || false;
+    myMessagesMode = res.myMessagesMode || "none";
     bgUrl = res.bgUrl || "";
     applyCSS();
   });
@@ -58,7 +62,7 @@ browser.storage.local
 browser.storage.onChanged.addListener((changes) => {
   if (changes.hideUsers) hideUsers = changes.hideUsers.newValue;
   if (changes.hideMode) hideMode = changes.hideMode.newValue;
-  if (changes.hideMyMessages) hideMyMessages = changes.hideMyMessages.newValue;
+  if (changes.myMessagesMode) myMessagesMode = changes.myMessagesMode.newValue;
   if (changes.bgUrl) bgUrl = changes.bgUrl.newValue;
   applyCSS();
 });

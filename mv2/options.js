@@ -67,25 +67,6 @@ browser.storage.local.get(["hideUsers", "hideMode"]).then((res) => {
   renderTable();
 });
 
-const hideMyMessagesCheckbox = document.getElementById("hideMyMessages");
-
-// Save when user toggles the checkbox
-hideMyMessagesCheckbox.addEventListener("change", () => {
-  browser.storage.local.set({ hideMyMessages: hideMyMessagesCheckbox.checked });
-});
-
-// Load saved setting at startup
-browser.storage.local
-  .get(["hideUsers", "hideMode", "hideMyMessages"])
-  .then((res) => {
-    hideUsers = res.hideUsers || [];
-    hideMode = res.hideMode || "content";
-    document.querySelector(`input[value=${hideMode}]`).checked = true;
-
-    hideMyMessagesCheckbox.checked = res.hideMyMessages || false;
-    renderTable();
-  });
-
 const bgUrlInput = document.getElementById("bgUrl");
 
 bgUrlInput.addEventListener("keypress", (e) => {
@@ -103,5 +84,30 @@ browser.storage.local
     hideMyMessagesCheckbox.checked = res.hideMyMessages || false;
     bgUrlInput.value = res.bgUrl || "";
     document.querySelector(`input[value=${hideMode}]`).checked = true;
+    renderTable();
+  });
+
+const myMessagesRadios = document.querySelectorAll(
+  "input[name='myMessagesMode']",
+);
+
+myMessagesRadios.forEach((radio) => {
+  radio.addEventListener("change", () => {
+    browser.storage.local.set({ myMessagesMode: radio.value });
+  });
+});
+
+// Load settings at startup
+browser.storage.local
+  .get(["hideUsers", "hideMode", "myMessagesMode", "bgUrl"])
+  .then((res) => {
+    hideUsers = res.hideUsers || [];
+    hideMode = res.hideMode || "content";
+    const mode = res.myMessagesMode || "none";
+    document.querySelector(
+      `input[name='myMessagesMode'][value='${mode}']`,
+    ).checked = true;
+
+    bgUrlInput.value = res.bgUrl || "";
     renderTable();
   });
