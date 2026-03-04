@@ -31,7 +31,7 @@
 
 <body>
     <h3>Teams Hide Users Messages</h3>
-
+    <h4>Users to hide</h4>
     <table id="usersTable">
         <thead>
             <tr>
@@ -59,7 +59,7 @@
     </div>
 
     <div>
-        <h4>My Messages:</h4><br>
+        <h4>My Messages:</h4>
         <label>
             <input type="radio" name="myMessagesMode" value="none" checked>
             Normal (show all)
@@ -75,8 +75,9 @@
     </div>
 
     <div>
-        <h4>Background Images</h4>
-        <input type="text" id="newBgUrl" placeholder="Enter background URL and press Enter" />
+        <h4>Background Image</h4>
+        <label for="newBgUrl">URL for background image</label>
+        <input type="text" id="newBgUrl" placeholder="https://wallpaperaccess.com/full/8779679.jpg" />
         <button id="addBgUrl">Add</button>
 
         <table id="bgTable">
@@ -89,6 +90,7 @@
             </thead>
             <tbody></tbody>
         </table>
+        <div id="restoreDefaultsContainer" style="margin-top: 8px;"></div>
     </div>
 
     <script src="options.js"></script>
