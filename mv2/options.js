@@ -92,8 +92,8 @@ function renderBgTable() {
   backgrounds.forEach((bg, i) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><input type="radio" name="bgSelect" data-index="${i}" ${bg.active ? "checked" : ""}></td>
-      <td style="word-break: break-all;">${bg.url}</td>
+      <td><input type="radio" name="bgSelect" id="${i}" data-index="${i}" ${bg.active ? "checked" : ""}></td>
+      <td style="word-break: break-all;"><label for="${i}">${bg.url}</label></td>
       <td><button data-remove="${i}">Remove</button></td>
     `;
     bgTable.appendChild(row);
