@@ -3,43 +3,60 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Hide Users</title>
-    <script defer src="options.js"></script>
     <style>
+        body {
+            font-family: sans-serif;
+            padding: 10px;
+            width: 300px;
+        }
+
         table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        th,
-        td {
+        td,
+        th {
             border-bottom: 1px solid #ddd;
-            padding: 4px;
+            padding: 5px;
+            text-align: left;
         }
 
         input[type="text"] {
-            width: 80%;
+            width: 180px;
         }
     </style>
 </head>
 
 <body>
     <h3>Hide Users</h3>
-    <input id="userInput" type="text" placeholder="Add user..." />
+    <input type="text" id="newUser" placeholder="Enter user ID..." />
     <button id="addUser">Add</button>
-    <br>
-    <label><input type="checkbox" id="hideEntire" /> Hide whole message</label>
+
+    <div>
+        <label>
+            <input type="radio" name="mode" value="content" checked>
+            Hide message content only
+        </label>
+        <label>
+            <input type="radio" name="mode" value="message">
+            Hide entire message
+        </label>
+    </div>
 
     <table id="usersTable">
         <thead>
             <tr>
-                <th>Family Name</th>
+                <th>Username</th>
                 <th>Hide</th>
                 <th>Remove</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
+
+    <script src="options.js"></script>
 </body>
 
 </html>

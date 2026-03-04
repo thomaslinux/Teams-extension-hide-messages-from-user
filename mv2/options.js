@@ -1,72 +1,68 @@
-const userInput = document.getElementById("userInput");
-const addBtn = document.getElementById("addUser");
-const tableBody = document.querySelector("#usersTable tbody");
-const hideEntireBox = document.getElementById("hideEntire");
+const newUserInput = document.getElementById("newUser");
+const addUserBtn = document.getElementById("addUser");
+const usersTable = document.querySelector("#usersTable tbody");
 
-function renderTable(users) {
-  tableBody.innerHTML = "";
-  users.forEach((u, i) => {
+let hideUsers = [];
+let hideMode = "content";
+
+function renderTable() {
+  usersTable.innerHTML = "";
+  hideUsers.forEach((u, i) => {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${u.name}</td>
-      <td><input type="checkbox" class="enable" data-index="${i}" ${u.enabled ? "checked" : ""}></td>
-      <td><button class="remove" data-index="${i}">X</button></td>`;
-    tableBody.appendChild(row);
+      <td><input type="checkbox" data-index="${i}" ${u.enabled ? "checked" : ""}></td>
+      <td><button data-remove="${i}">Remove</button></td>
+    `;
+    usersTable.appendChild(row);
   });
 }
 
-function loadState() {
-  browser.storage.local.get(
-    ["hideUsersList", "hideEntireMessage"],
-    ({ hideUsersList = [], hideEntireMessage = false }) => {
-      renderTable(hideUsersList);
-      hideEntireBox.checked = hideEntireMessage;
-    },
-  );
+function save() {
+  browser.storage.local.set({ hideUsers, hideMode });
 }
 
-function saveUsers(users) {
-  browser.storage.local.set({ hideUsersList: users });
-}
+addUserBtn.addEventListener("click", () => {
+  const name = newUserInput.value.trim();
+  if (name && !hideUsers.some((u) => u.name === name)) {
+    hideUsers.push({ name, enabled: true });
+    save();
+    renderTable();
+    newUserInput.value = "";
+  }
+});
 
-function addUser() {
-  const name = userInput.value.trim();
-  if (!name) return;
-  browser.storage.local.get("hideUsersList", ({ hideUsersList = [] }) => {
-    hideUsersList.push({ name, enabled: true });
-    saveUsers(hideUsersList);
-    renderTable(hideUsersList);
+newUserInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") addUserBtn.click();
+});
+
+usersTable.addEventListener("change", (e) => {
+  const idx = e.target.dataset.index;
+  if (idx !== undefined) {
+    hideUsers[idx].enabled = e.target.checked;
+    save();
+  }
+});
+
+usersTable.addEventListener("click", (e) => {
+  const idx = e.target.dataset.remove;
+  if (idx !== undefined) {
+    hideUsers.splice(idx, 1);
+    save();
+    renderTable();
+  }
+});
+
+document.querySelectorAll("input[name=mode]").forEach((r) => {
+  r.addEventListener("change", () => {
+    hideMode = r.value;
+    save();
   });
-  userInput.value = "";
-}
-
-addBtn.addEventListener("click", addUser);
-userInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") addUser();
-});
-hideEntireBox.addEventListener("change", (e) =>
-  browser.storage.local.set({ hideEntireMessage: e.target.checked }),
-);
-
-tableBody.addEventListener("click", (e) => {
-  if (e.target.classList.contains("remove")) {
-    const index = +e.target.dataset.index;
-    browser.storage.local.get("hideUsersList", ({ hideUsersList = [] }) => {
-      hideUsersList.splice(index, 1);
-      saveUsers(hideUsersList);
-      renderTable(hideUsersList);
-    });
-  }
 });
 
-tableBody.addEventListener("change", (e) => {
-  if (e.target.classList.contains("enable")) {
-    const index = +e.target.dataset.index;
-    browser.storage.local.get("hideUsersList", ({ hideUsersList = [] }) => {
-      hideUsersList[index].enabled = e.target.checked;
-      saveUsers(hideUsersList);
-    });
-  }
+browser.storage.local.get(["hideUsers", "hideMode"]).then((res) => {
+  hideUsers = res.hideUsers || [];
+  hideMode = res.hideMode || "content";
+  document.querySelector(`input[value=${hideMode}]`).checked = true;
+  renderTable();
 });
-
-document.addEventListener("DOMContentLoaded", loadState);
