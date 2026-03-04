@@ -52,7 +52,10 @@ function applyCSS() {
     `;
   }
 
-  if (document.querySelector("html").className.includes("dark")) {
+  if (
+    bgUrl != "none" &&
+    document.querySelector("html").className.includes("dark")
+  ) {
     css += ` 
       .fui-FluentProviderr0 {
         --messageColor: #000000a1 !important;
