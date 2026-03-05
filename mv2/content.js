@@ -77,6 +77,14 @@ function applyCSS() {
         --colorNeutralCardBackground: var(--messageColor);
         --colorNeutralBackground1: var(--messageColor);
       }`;
+  } else if (bgUrl != "none") {
+    result += `
+    .fui-Divider,
+    time,
+    [data-tid="message-author-name"] {
+        color: white !important;
+    }
+    `;
   }
 
   style.textContent = css;

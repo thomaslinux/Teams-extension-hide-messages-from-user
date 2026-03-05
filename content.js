@@ -105,6 +105,14 @@ function buildBackgroundCss(currentBgUrl) {
 --colorNeutralBackground1: #000000a1 !important;
 }
 `;
+  } else {
+    result += `
+    .fui-Divider,
+    time,
+    [data-tid="message-author-name"] {
+        color: white !important;
+    }
+    `;
   }
   result += `.ui-flex.a.b.c.d.i.j.k.l.m.n {
 background-image: url("${url}");
