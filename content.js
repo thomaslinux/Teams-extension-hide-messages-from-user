@@ -100,11 +100,11 @@ function buildBackgroundCss(currentBgUrl) {
   if (!currentBgUrl) return "";
   const url = currentBgUrl.replace(/"/g, '\\"');
   return `
-    body {
+    .ui-flex.a.b.c.d.i.j.k.l.m.n {
       background-image: url("${url}");
       background-size: cover;
       background-repeat: no-repeat;
-      background-attachment: fixed;
+      background-position: center;
     }
   `;
 }
