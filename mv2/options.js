@@ -81,12 +81,18 @@ function renderBgTable() {
   backgrounds.forEach((bg, i) => {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><input type="radio" name="bgSelect" id="${i}" data-index="${i}" ${bg.active ? "checked" : ""}></td>
-      <td class="url"><label for="${i}">${bg.url}</label></td>
-    `;
-    bg.url !== "none"
-      ? (row.innerHTML += `<td><button data-remove="${i}">Remove</button></td>`)
-      : (row.innerHTML += "<td></td>");
+    <td>
+      <label style="display:block;cursor:pointer">
+        <input type="radio" name="bgSelect" id="bg-${i}" data-index="${i}" ${bg.active ? "checked" : ""}>
+        <span>${bg.url}</span>
+      </label>
+    </td>
+    ${
+      bg.url !== "none"
+        ? `<td><button data-remove="${i}">Remove</button></td>`
+        : `<td></td>`
+    }
+  `;
     bgTable.appendChild(row);
   });
 }
