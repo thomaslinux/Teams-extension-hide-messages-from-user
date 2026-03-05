@@ -31,24 +31,19 @@
             word-break: break-all;
         }
 
-        tr {
-            cursor: pointer;
-        }
-
         td.url label {
             display: block;
             width: 100%;
             height: 100%;
+            cursor: pointer;
         }
 
-        /* Optional: clicking anywhere in row triggers the radio */
-        tr {
-            position: relative;
-        }
-
-        tr input[type="radio"] {
-            pointer-events: none;
-            /* so clicks pass through if needed */
+        td input {
+            display: block;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+            cursor: pointer;
         }
     </style>
 </head>
