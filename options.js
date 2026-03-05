@@ -41,14 +41,23 @@ function renderUsers() {
 
     const checkboxId = `user-hide-${index}`;
 
+    // FAMILYNAME td wrapped entirely in label for the checkbox
     const tdName = document.createElement("td");
     const nameLabel = document.createElement("label");
     nameLabel.setAttribute("for", checkboxId);
     nameLabel.textContent = u.name;
+    nameLabel.style.display = "block";
+    nameLabel.style.width = "100%";
     tdName.appendChild(nameLabel);
     tr.appendChild(tdName);
 
+    // Hide td WRAPPED IN LABEL
     const tdHide = document.createElement("td");
+    const hideLabel = document.createElement("label");
+    hideLabel.setAttribute("for", checkboxId);
+    hideLabel.style.display = "block";
+    hideLabel.style.width = "100%";
+
     const chk = document.createElement("input");
     chk.type = "checkbox";
     chk.id = checkboxId;
@@ -59,10 +68,6 @@ function renderUsers() {
       saveState({ users });
     });
 
-    const hideLabel = document.createElement("label");
-    hideLabel.setAttribute("for", checkboxId);
-    hideLabel.style.display = "inline-block";
-    hideLabel.style.width = "100%";
     hideLabel.appendChild(chk);
     tdHide.appendChild(hideLabel);
     tr.appendChild(tdHide);
