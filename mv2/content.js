@@ -67,24 +67,22 @@ function applyCSS() {
     `;
   }
 
-  if (
-    bgUrl != "none" &&
-    document.querySelector("html").className.includes("dark")
-  ) {
-    css += ` 
-      .fui-FluentProviderr0 {
-        --messageColor: #000000a1 !important;
-        --colorNeutralCardBackground: var(--messageColor);
-        --colorNeutralBackground1: var(--messageColor);
-      }`;
-  } else if (bgUrl != "none") {
-    result += `
+  if (bgUrl != "none") {
+    css += `
     .fui-Divider,
     time,
     [data-tid="message-author-name"] {
         color: white !important;
     }
     `;
+    if (document.querySelector("html").className.includes("dark")) {
+      css += ` 
+      .fui-FluentProviderr0 {
+        --messageColor: #000000a1 !important;
+        --colorNeutralCardBackground: var(--messageColor);
+        --colorNeutralBackground1: var(--messageColor);
+      }`;
+    }
   }
 
   style.textContent = css;
