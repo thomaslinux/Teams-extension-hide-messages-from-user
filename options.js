@@ -2,9 +2,9 @@
 
 const DEFAULT_BG_URLS = [
   "none",
+  "https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280",
   "https://unsplash.com/photos/m35LirqP6y8/download?&h=1280",
   "https://unsplash.com/photos/OVO8nK-7Rfs/download?&h=1280",
-  "https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280",
   "https://unsplash.com/photos/2dp1Ud5gG2A/download?&h=1280",
   "https://wallpaperaccess.com/full/8779679.jpg",
 ];
@@ -63,7 +63,7 @@ function renderUsers() {
 
     const tdRemove = document.createElement("td");
     const btn = document.createElement("button");
-    btn.textContent = "✕";
+    btn.textContent = "X";
     btn.addEventListener("click", () => {
       const users = state.users.filter((_, i) => i !== index);
       saveState({ users });
@@ -120,7 +120,7 @@ function renderBackgrounds() {
 
     const tdRemove = document.createElement("td");
     const btn = document.createElement("button");
-    btn.textContent = "✕";
+    btn.textContent = "X";
     btn.addEventListener("click", () => {
       const newUrls = state.backgroundUrls.filter((_, i) => i !== index);
       let active = state.activeBackgroundUrl;
