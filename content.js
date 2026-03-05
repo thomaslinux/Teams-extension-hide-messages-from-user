@@ -100,10 +100,11 @@ function buildBackgroundCss(currentBgUrl) {
   let result = "";
   if (document.querySelector("html").className.includes("dark")) {
     result += `.fui-FluentProviderr0 {
---messageColor: #000000a1;
---colorNeutralCardBackground: var(--messageColor);
---colorNeutralBackground1: var(--messageColor);
-}`;
+--messageColor: #000000a1 !important;
+--colorNeutralCardBackground: #000000a1 !important;
+--colorNeutralBackground1: #000000a1 !important;
+}
+`;
   }
   result += `.ui-flex.a.b.c.d.i.j.k.l.m.n {
 background-image: url("${url}");
