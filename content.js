@@ -97,7 +97,7 @@ function buildMyMessagesCss(myMode) {
 function buildBackgroundCss(currentBgUrl) {
   if (!currentBgUrl || currentBgUrl == "none") return "";
   const url = currentBgUrl.replace(/"/g, '\\"');
-  return `
+  let result = `
     .ui-flex.a.b.c.d.i.j.k.l.m.n {
       background-image: url("${url}");
       background-size: cover;
@@ -105,6 +105,14 @@ function buildBackgroundCss(currentBgUrl) {
       background-position: center;
     }
   `;
+  if (document.querySelector("html").className.includes("dark")) {
+    result += ` 
+      .fui-FluentProviderr0 {
+        --messageColor: #000000a1 !important;
+        --colorNeutralCardBackground: var(--messageColor);
+        --colorNeutralBackground1: var(--messageColor);
+      }`;
+  }
 }
 
 function applyStyles(settings) {
