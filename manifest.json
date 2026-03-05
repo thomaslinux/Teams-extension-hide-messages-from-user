@@ -12,7 +12,8 @@
   "content_scripts": [
     {
       "matches": ["https://teams.cloud.microsoft/*"],
-      "js": ["content.js"]
+      "js": ["content.js"],
+      "run_at": "document_idle"
     }
   ]
 }

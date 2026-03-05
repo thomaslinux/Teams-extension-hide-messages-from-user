@@ -1,4 +1,4 @@
-a manifest v3 extension based on this code :
+manifest v3 extension based on this working userscript :
 
 const hideUsers = ["USER1", "USER2"];
 
@@ -15,12 +15,46 @@ window.addEventListener("load", () => {
     .join(",\n");
 
 
-create a <style id="hideUsers"></style>
+create a <style id="tl9hideUsers"></style>
+create a <style id="tl9bgUrl></style>
 
 options :
-- add / remove a user to the list of users to hide (Enter or click on add to add the user)
+- popup option on click on the extension icon
+<h3> Users to hide
+- add / remove a user to the list of users to hide (Enter to add a user to the list)
+- display the users in a table th FAMILYNAME Hide Remove
 - enable disable hiding of that user (checkbox) 
-- toggle between hide message content only or hide message. hide message uses this line :
+- multiple users can be hidden
+- radio between
+  - hide message content only
+  - hide message. hide message uses this line :
          `div[class*="fui-ChatMessage"]:has(img[src*="${u}"])`,
+  - show only those messages. This uses this style :
+       div[class*="fui-ChatMessage"]:has(img) div[data-message-content] {
+        display: none;
+      }
+      div[class*="fui-ChatMessage"]:has(img[src*="LASTNAME"]) div[data-message-content],
+          display: inherit;
+      } 
+<h3> My messages
+- radio toggle between
+  - Normal (show all)
+  - Hide all my messages
+        div[class*="fui-ChatMyMessage"] {
+        display:none;
+    }
+  - Show only my messages
 
-if the function is too long, extract a part of it in a separate function.
+<h3> Background Image
+- add / remove a background URL (Enter to add)
+- display the URLs in a table th USE BackgroundURL Remove (radio selector)
+
+default URLs to add :
+
+ https://unsplash.com/photos/m35LirqP6y8/download?&h=1280
+ https://unsplash.com/photos/OVO8nK-7Rfs/download?&h=1280
+ https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280
+ https://unsplash.com/photos/2dp1Ud5gG2A/download?&h=1280
+ https://wallpaperaccess.com/full/8779679.jpg
+
+if functions are too long, extract in separate functions.

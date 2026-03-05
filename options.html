@@ -1,18 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
-    <title>Hide Users</title>
-    <link rel="stylesheet" href="options.css" />
+    <meta charset="utf-8" />
+    <title>Chat Message Hider</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            font-size: 13px;
+            margin: 10px;
+            min-width: 320px;
+        }
+
+        h3 {
+            margin: 8px 0 4px;
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 4px;
+        }
+
+        th,
+        td {
+            border-bottom: 1px solid #ddd;
+            padding: 2px 4px;
+            text-align: left;
+            font-size: 12px;
+        }
+
+        th {
+            font-weight: 600;
+        }
+
+        .small {
+            font-size: 11px;
+            color: #666;
+        }
+
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 6px;
+        }
+
+        button {
+            font-size: 11px;
+            padding: 2px 6px;
+        }
+    </style>
 </head>
 
 <body>
-    <h3>Hide Chat Users</h3>
-
-    <table id="userTable">
+    <h3>Users to hide</h3>
+    <input id="userInput" type="text" placeholder="Type LASTNAME (or identifier) and press Enter" />
+    <div class="small">Check “Hide” to enable hiding for that user.</div>
+    <table id="usersTable">
         <thead>
             <tr>
-                <th>FAMILYNAME</th>
+                <th>Familyname</th>
                 <th>Hide</th>
                 <th>Remove</th>
             </tr>
@@ -20,20 +75,33 @@
         <tbody></tbody>
     </table>
 
-    <div>
-        <input id="userInput" placeholder="FAMILYNAME" />
-        <button id="addUser">Add</button>
+    <div class="radio-group" id="userModeGroup">
+        <label><input type="radio" name="userMode" value="hideContent" /> Hide message content only</label>
+        <label><input type="radio" name="userMode" value="hideMessage" /> Hide message</label>
+        <label><input type="radio" name="userMode" value="showOnly" /> Show only those messages</label>
     </div>
 
-    <div>
-        <label>
-            <input type="radio" name="mode" value="content" checked /> Hide content only
-        </label>
-        <br>
-        <label>
-            <input type="radio" name="mode" value="message" /> Hide entire message
-        </label>
+    <h3>My messages</h3>
+    <div class="radio-group" id="myMessagesGroup">
+        <label><input type="radio" name="myMessagesMode" value="normal" /> Normal (show all)</label>
+        <label><input type="radio" name="myMessagesMode" value="hideAll" /> Hide all my messages</label>
+        <label><input type="radio" name="myMessagesMode" value="showOnly" /> Show only my messages</label>
     </div>
+
+    <h3>Background Image</h3>
+    <input id="bgInput" type="text" placeholder="Paste background image URL and press Enter" />
+    <table id="bgTable">
+        <thead>
+            <tr>
+                <th>Use</th>
+                <th>Background URL</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="small">Selecting “Use” sets this background image.</div>
+
     <script src="options.js"></script>
 </body>
 
