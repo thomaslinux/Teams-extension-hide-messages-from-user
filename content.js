@@ -58,15 +58,13 @@ function buildUserCss(users, userMode) {
   if (userMode === "showOnly") {
     // Hide all message contents, then show only those matching enabled users
     const base =
-      `div[class*="fui-ChatMessage"]:has(img) div[data-message-content] {` +
-      `  display: none;` +
-      `}\n`;
+      `div[class*="fui-ChatMessage"]:has(img) {` + `  display: none;` + `}\n`;
     const selectors = activeUsers
       .map(
         (u) =>
           `div[class*="fui-ChatMessage"]:has(img[src*="${CSS.escape(
             u.name,
-          )}"]) div[data-message-content]`,
+          )}"])`,
       )
       .join(",\n");
     const show = selectors ? `${selectors} { display: inherit; }` : "";
