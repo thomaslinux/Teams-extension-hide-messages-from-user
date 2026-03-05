@@ -119,21 +119,23 @@ function renderBackgrounds() {
     tr.appendChild(tdUrl);
 
     const tdRemove = document.createElement("td");
-    const btn = document.createElement("button");
-    btn.textContent = "X";
-    btn.addEventListener("click", () => {
-      const newUrls = state.backgroundUrls.filter((_, i) => i !== index);
-      let active = state.activeBackgroundUrl;
-      if (url === active) {
-        active = newUrls[0] || "";
-      }
-      saveState({
-        backgroundUrls: newUrls,
-        activeBackgroundUrl: active,
+    if (url != "none") {
+      const btn = document.createElement("button");
+      btn.textContent = "X";
+      btn.addEventListener("click", () => {
+        const newUrls = state.backgroundUrls.filter((_, i) => i !== index);
+        let active = state.activeBackgroundUrl;
+        if (url === active) {
+          active = newUrls[0] || "";
+        }
+        saveState({
+          backgroundUrls: newUrls,
+          activeBackgroundUrl: active,
+        });
+        renderBackgrounds();
       });
-      renderBackgrounds();
-    });
-    tdRemove.appendChild(btn);
+      tdRemove.appendChild(btn);
+    }
     tr.appendChild(tdRemove);
 
     bgTableBody.appendChild(tr);
