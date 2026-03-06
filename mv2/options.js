@@ -53,7 +53,7 @@ usersTable.addEventListener("click", (e) => {
   }
 });
 
-document.querySelectorAll("input[name=mode]").forEach((r) => {
+document.querySelectorAll("input[name=userMode]").forEach((r) => {
   r.addEventListener("change", () => {
     hideMode = r.value;
     save();
@@ -142,9 +142,9 @@ browser.storage.local
     backgrounds = res.backgrounds || [];
     renderTable();
     renderBgTable();
-    const mode = res.myMessagesMode || "none";
+    const userMode = res.myMessagesMode || "none";
     document.querySelector(
-      `input[name='myMessagesMode'][value='${mode}']`,
+      `input[name='myMessagesMode'][value='${userMode}']`,
     ).checked = true;
   });
 
