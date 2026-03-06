@@ -58,7 +58,7 @@ function applyCSS() {
   const bgUrl = getActiveBgUrl();
   if (bgUrl && bgUrl != "none") {
     css += `
-      .ui-flex.a.b.c.d.i.j.k.l.m.n {
+    div#message-pane-layout-a11y {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;

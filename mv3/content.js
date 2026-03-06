@@ -114,11 +114,11 @@ function buildBackgroundCss(currentBgUrl) {
     }
     `;
 
-  result += `.ui-flex.a.b.c.d.i.j.k.l.m.n {
-background-image: url("${url}");
-background-size: cover;
-background-repeat: no-repeat;
-background-position: center;
+  result += `div#message-pane-layout-a11y {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("${url}");
 }`;
   return result;
 }
