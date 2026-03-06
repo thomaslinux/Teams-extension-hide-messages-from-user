@@ -8,6 +8,9 @@ https://userstyles.world/style/25421/tl9-teams-set-a-background-image-from-url
 
 Made help from perplexity.ai
 
+![a screenshot of the extension in firefox](firefox-screenshot.png)
+![a screenshot of the extension in chrome](chrome-screenshot.png)
+
 # Features / TODO
 
 - [x] add / remove a user to hide
