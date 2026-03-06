@@ -14,7 +14,7 @@ Made help from perplexity.ai
 - [x] enable / disable hiding of a user
 - [x] hide / show only my messages
 - [x] add / remove a background image (better for darkmode)
-- [ ] Teams Dark like theme
+- [ ] Teams Dark like theme (https://microsoft.github.io/app-camp/aad/A03-after-apply-styling/)
 - [ ] Same Firefox and Chrome options.html (renaming the options.html values and options.js correspondances)
 
 ## Installation on Chrome
