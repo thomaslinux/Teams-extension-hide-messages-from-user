@@ -97,30 +97,23 @@ function buildMyMessagesCss(myMode) {
 function buildBackgroundCss(currentBgUrl) {
   if (!currentBgUrl || currentBgUrl == "none") return "";
   const url = currentBgUrl.replace(/"/g, '\\"');
-  let result = "";
-  if (document.querySelector("html").className.includes("dark")) {
-    result += `.fui-FluentProviderr0 {
---messageColor: #000000a1 !important;
---colorNeutralCardBackground: #000000a1 !important;
---colorNeutralBackground1: #000000a1 !important;
-}
-`;
+  return `
+  .theme-darkV2 .fui-FluentProviderr0 {
+    --messageColor: #000000a1 !important;
+    --colorNeutralCardBackground: #000000a1 !important;
+    --colorNeutralBackground1: #000000a1 !important;
   }
-  result += `
-    .fui-Divider,
-    time,
-    [data-tid="message-author-name"] {
-        color: white !important;
-    }
-    `;
-
-  result += `div#message-pane-layout-a11y {
+  .fui-Divider,
+  time,
+  [data-tid="message-author-name"] {
+    color: white !important;
+  }
+  div#message-pane-layout-a11y {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url("${url}");
-}`;
-  return result;
+  }`;
 }
 
 function applyStyles(settings) {
