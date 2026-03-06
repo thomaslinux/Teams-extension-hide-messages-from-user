@@ -59,30 +59,22 @@ function applyCSS() {
   if (bgUrl && bgUrl != "none") {
     css += `
     div#message-pane-layout-a11y {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        background-image: url('${bgUrl}');
-      }
-    `;
-  }
-
-  if (bgUrl != "none") {
-    css += `
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url('${bgUrl}');
+    }
     .fui-Divider,
     time,
     [data-tid="message-author-name"] {
-        color: white !important;
+      color: white !important;
+    }
+    .theme-darkV2 .fui-FluentProviderr0 {
+      --messageColor: #000000a1 !important;
+      --colorNeutralCardBackground: var(--messageColor);
+      --colorNeutralBackground1: var(--messageColor);
     }
     `;
-    if (document.querySelector("html").className.includes("dark")) {
-      css += ` 
-      .fui-FluentProviderr0 {
-        --messageColor: #000000a1 !important;
-        --colorNeutralCardBackground: var(--messageColor);
-        --colorNeutralBackground1: var(--messageColor);
-      }`;
-    }
   }
 
   style.textContent = css;
