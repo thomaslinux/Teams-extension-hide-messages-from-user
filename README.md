@@ -8,17 +8,32 @@ https://userstyles.world/style/25421/tl9-teams-set-a-background-image-from-url
 
 Made with [help](prompt.txt) from [perplexity.ai](https://perplexity.ai)
 
-# Features / TODO
+# Features / TODO / Roadmap
+
+## V0 - Alpha
 
 - [x] add / remove a user to hide
 - [x] enable / disable hiding of a user
 - [x] hide / show only my messages
 - [x] add / remove a background image (better for darkmode)
-- [ ] alias name for the background URL
-- [ ] Teams Dark like theme (https://microsoft.github.io/app-camp/aad/A03-after-apply-styling/)
-- [ ] Same Firefox and Chrome options.html (renaming the options.html values and .js correspondances)
 
-# Screenshots
+## V1 - Initial release
+
+- [ ] Same Firefox and Chrome options.html (renaming the options.html values and .js correspondances)
+- [ ] alias name for the background URL
+
+## V2 - 
+
+- [ ] Teams like theme (https://microsoft.github.io/app-camp/aad/A03-after-apply-styling/)
+
+## V3 - Stylus alternative?
+
+- [ ] framework for inserting custom css
+- [ ] Linkedin block users and background edit port
+- [ ] editable css rules to insert
+- [ ] json save and interprating of the custom options to insert
+
+# Screenshots V0
 
 | Firefox interface           | Chrome interface           |
 | --------------------------- | -------------------------- |
