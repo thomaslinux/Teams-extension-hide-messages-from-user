@@ -21,7 +21,7 @@ Made with [help](prompt.txt) from [perplexity.ai](https://perplexity.ai)
 
 - [ ] Same Firefox and Chrome options.html (renaming the options.html values and .js correspondances)
 - [ ] alias name for the background URL
-
+- [ ] checkbox, show content on hover
 ## V2 - 
 
 - [ ] Teams like theme (https://microsoft.github.io/app-camp/aad/A03-after-apply-styling/)
