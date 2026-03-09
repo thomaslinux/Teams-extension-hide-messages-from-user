@@ -67,7 +67,7 @@ browser.storage.local.get(["hideUsers", "hideMode"]).then((res) => {
   renderTable();
 });
 
-const bgUrlInput = document.getElementById("newBgUrl");
+const bgUrlInput = document.getElementById("bgInput");
 const addBgUrlBtn = document.getElementById("addBgUrl");
 const bgTable = document.querySelector("#bgTable tbody");
 
