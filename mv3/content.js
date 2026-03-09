@@ -90,7 +90,7 @@ function buildMyMessagesCss(myMode) {
       }
     `;
   }
-  // "normal"
+  // "showAll"
   return "";
 }
 
@@ -120,7 +120,7 @@ function applyStyles(settings) {
   const {
     users = [],
     userMode = "hideContent",
-    myMessagesMode = "normal",
+    myMessagesMode = "showAll",
     backgroundUrls = [],
     activeBackgroundUrl = "",
   } = settings || {};
@@ -141,7 +141,7 @@ function init() {
     {
       users: [],
       userMode: "hideContent",
-      myMessagesMode: "normal",
+      myMessagesMode: "showAll",
       backgroundUrls: [],
       activeBackgroundUrl: "",
     },
@@ -158,7 +158,7 @@ function init() {
       {
         users: [],
         userMode: "hideContent",
-        myMessagesMode: "normal",
+        myMessagesMode: "showAll",
         backgroundUrls: [],
         activeBackgroundUrl: "",
       },

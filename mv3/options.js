@@ -12,7 +12,7 @@ const DEFAULT_BG_URLS = [
 let state = {
   users: [],
   userMode: "hideContent",
-  myMessagesMode: "normal",
+  myMessagesMode: "showAll",
   backgroundUrls: [],
   activeBackgroundUrl: "",
 };
@@ -213,7 +213,7 @@ function init() {
     {
       users: [],
       userMode: "hideContent",
-      myMessagesMode: "normal",
+      myMessagesMode: "showAll",
       backgroundUrls: DEFAULT_BG_URLS,
       activeBackgroundUrl: DEFAULT_BG_URLS[0] || "",
     },
