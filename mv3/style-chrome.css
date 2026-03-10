@@ -1,0 +1,61 @@
+body {
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+    margin: 10px;
+    min-width: 320px;
+}
+
+h3 {
+    margin: 8px 0 4px;
+    font-size: 14px;
+}
+
+input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 4px;
+}
+
+th,
+td {
+    border-bottom: 1px solid #ddd;
+    padding: 2px 4px;
+    text-align: left;
+    font-size: 12px;
+}
+
+th {
+    font-weight: 600;
+}
+
+.small {
+    font-size: 11px;
+    color: #666;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-bottom: 6px;
+}
+
+.url {
+    word-break: break-all;
+}
+
+button {
+    font-size: 11px;
+    padding: 2px 6px;
+}
+
+label:hover {
+    cursor: pointer;
+    background-color: aliceblue;
+}
