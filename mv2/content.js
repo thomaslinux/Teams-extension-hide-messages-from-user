@@ -6,7 +6,7 @@ let backgrounds = []; // stored list of {url, active}
 function buildSelector() {
   const base =
     hideMode === "hideContent"
-      ? `div[class*="fui-ChatMessage"]:has(img[src*="{{u}}"]) div[data-message-content]`
+      ? `div[class*="fui-ChatMessage"]:has(img[src*="{{u}}"]) div[id*=message-body] div`
       : `div[class*="fui-ChatMessage"]:has(img[src*="{{u}}"])`;
 
   let selectors = hideUsers
