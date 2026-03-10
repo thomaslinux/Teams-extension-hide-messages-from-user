@@ -30,3 +30,40 @@ window.addEventListener("load", () => {
   `;
   document.head.appendChild(style);
 });
+
+// javascript select users using name
+let users = [];
+document
+  .querySelectorAll("span[data-tid*=message-author-name]")
+  .forEach((span) => {
+    if ((span.textContent.includes = "LASTNAME")) {
+      users.push(span);
+    }
+  });
+
+// document.querySelector('div[data-tid="message-pane-list-runway"]').addEventListener('e', () => {
+//   console.log('event change on the element');
+// })
+
+// listen changes on the DOM
+const target = document.querySelector(
+  'div[data-tid="message-pane-list-runway"]',
+);
+
+if (target) {
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      console.log("DOM changed:", mutation);
+      // Example: react only to text/HTML changes
+      if (mutation.type === "childList" || mutation.type === "characterData") {
+        console.log("HTML changed on the element or its children");
+      }
+    }
+  });
+
+  observer.observe(target, {
+    childList: true, // added/removed nodes
+    characterData: true, // text changes
+    subtree: true, // watch descendants too
+  });
+}
