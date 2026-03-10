@@ -45,9 +45,12 @@ document
 //   console.log('event change on the element');
 // })
 
-const usersToHide = ["user1", "user2"];
+const usersToHide = [];
+usersToHide.push("user1");
+usersToHide.push("user2");
+console.table(usersToHide);
 
-// Listen for changes on the DOM
+// listen changes on the DOM
 const target = document.querySelector(
   'div[data-tid="message-pane-list-runway"]',
 );
@@ -55,26 +58,24 @@ const target = document.querySelector(
 if (target) {
   const observer = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
+      console.log("DOM changed:", mutation);
       document
         .querySelectorAll("span[data-tid*=message-author-name]")
         .forEach((span) => {
-          const authorName = span.innerText.trim();
+          console.log("span.innerText", span.innerText);
+          console.log("span.classList", span.classList);
 
-          if (usersToHide.includes(authorName)) {
-            // Find the closest chat message container
-            const chatMessageDiv = span.closest(
-              'div[class*="fui-ChatMessage"]',
-            );
-            if (chatMessageDiv) {
-              // Target the message body inside
-              const messageBody = chatMessageDiv.querySelector(
-                'div[id*="message-body"] div',
+          usersToHide.forEach((userToHide) => {
+            if (span.innerText == userToHide) {
+              console.log(
+                "span.innerText == userToHide:",
+                span.innerText == userToHide,
               );
-              if (messageBody) {
-                messageBody.style.display = "none";
+              if (!span.classList.contains("hideThatUserMessage")) {
+                span.classList.add("hideThatUserMessage");
               }
             }
-          }
+          });
         });
     }
   });
