@@ -45,7 +45,7 @@ document
 //   console.log('event change on the element');
 // })
 
-const userToHide = "user";
+const hideUsers = ["USER1", "USER2"];
 
 // listen changes on the DOM
 const target = document.querySelector(
@@ -61,10 +61,16 @@ if (target) {
         .forEach((span) => {
           console.log("span.innerText", span.innerText);
           console.log("span.classList", span.classList);
-          if (span.innerText.includes(`"${userToHide}"`)) {
-            console.log("usertohide : ", userToHide);
-            if (!span.classList.contains("hideThatUserMessage")) {
+          span.classList.add("detectedAuthor");
+          for (const userToHide of hideUsers) {
+            if (
+              text.endsWith(userToHide) &&
+              (text === userToHide ||
+                text.slice(0, -userToHide.length).trim().endsWith(" "))
+            ) {
               span.classList.add("hideThatUserMessage");
+              console.log("Hiding message from:", userToHide);
+              break; // Found match, move to next span
             }
           }
         });
