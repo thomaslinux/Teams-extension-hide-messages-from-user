@@ -45,25 +45,30 @@ document
 //   console.log('event change on the element');
 // })
 
+const userToHide = "user";
+
 // listen changes on the DOM
 const target = document.querySelector(
   'div[data-tid="message-pane-list-runway"]',
 );
 
 if (target) {
-  const observer = new MutationObserver(() => {
-    document
-      .querySelectorAll("span[data-tid*=message-author-name]")
-      .forEach((span) => {
-        if (span.textContent.includes("FAMILYNAME")) {
-          const msgBody = span.closest(
-            'div[class*="fui-ChatMessage"] div[id*=message-body] div',
-          );
-          if (msgBody && !msgBody.classList.contains("hideThatUserMessage")) {
-            msgBody.classList.add("hideThatUserMessage");
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      console.log("DOM changed:", mutation);
+      document
+        .querySelectorAll("span[data-tid*=message-author-name]")
+        .forEach((span) => {
+          console.log("span.innerText", span.innerText);
+          console.log("span.classList", span.classList);
+          if (span.innerText == userToHide) {
+            console.log("usertohide : ", userToHide);
+            if (!span.classList.contains("hideThatUserMessage")) {
+              span.classList.add("hideThatUserMessage");
+            }
           }
-        }
-      });
+        });
+    }
   });
 
   observer.observe(target, {
