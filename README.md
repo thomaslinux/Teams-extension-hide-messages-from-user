@@ -95,10 +95,12 @@ Because we scroll conversations, I would need to run the logic for every scroll.
 - [ ] Same Firefox and Chrome options.html (renaming the options.html values and .js correspondances)
 - [ ] alias name for the background URL
 - [ ] checkbox, show content on hover
+- [ ] background-image: linear-gradient(#00000017,#000000b0), url('https://uns...');
 
 ## V2 -
 
 - [ ] Teams like theme (https://microsoft.github.io/app-camp/aad/A03-after-apply-styling/)
+- [ ] Right click on image, set as Teams background
 
 ## V3 - Stylus alternative?
 
