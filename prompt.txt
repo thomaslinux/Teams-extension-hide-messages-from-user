@@ -10,7 +10,7 @@ window.addEventListener("load", () => {
   const selector = hideUsers
     .map(
       (u) =>
-        `div[class*="fui-ChatMessage"]:has(img[src*="${u}"]) div[id*=message-body] div`,
+        `div[class*="fui-ChatMessage"]:has(img[src*="${u}"]) div[data-message-content]`,
     )
     .join(",\n");
 
@@ -18,29 +18,24 @@ window.addEventListener("load", () => {
 create a <style id="tl9hideUsers"></style>
 create a <style id="tl9bgUrl></style>
 
-if functions are too long, extract in separate functions.
-no anonymous functions
-save all the variables (css rules) in config.json
-user can export and import their config.json
-
 options :
 - popup option on click on the extension icon
 <h3> Users to hide
 - add / remove a user to the list of users to hide (Enter to add a user to the list)
-- display the users in <label>John DOE<input checkbox>hide <button remove
-- before the list of users thead Hide | John DOE | remove
-- on click on thead hide, uncheck all hide users checkboxes
-- users items can be movep up or down
+- display the users in a table th FAMILYNAME Hide Remove
 - enable disable hiding of that user (checkbox) 
 - multiple users can be hidden
 - radio between
   - hide message content only
   - hide message. hide message uses this line :
          `div[class*="fui-ChatMessage"]:has(img[src*="${u}"])`,
-
-
-users can modify the current injected css rules from the interface
-
+  - show only those messages. This uses this style :
+       div[class*="fui-ChatMessage"]:has(img) div[data-message-content] {
+        display: none;
+      }
+      div[class*="fui-ChatMessage"]:has(img[src*="LASTNAME"]) div[data-message-content],
+          display: inherit;
+      } 
 <h3> My messages
 - radio toggle between
   - Normal (show all)
@@ -49,23 +44,20 @@ users can modify the current injected css rules from the interface
         display:none;
     }
   - Show only my messages
-      div[class*="fui-ChatMessage"] {
-        display:none;
-      }
 
 <h3> Background Image
 - add / remove a background URL (Enter to add)
 - display the URLs in a table th USE BackgroundURL Remove (radio selector)
-- radio as a label, fake table with input inside a label and button next to id
-- users should be able to had an alias to the name of the list
-- users can move the elements up or down
 
 default URLs to add :
 
- https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280 // alias egypt
- https://unsplash.com/photos/OVO8nK-7Rfs/download?&h=1280 // alias stars
- https://unsplash.com/photos/m35LirqP6y8/download?&h=1280 // alias venus
- https://unsplash.com/photos/2dp1Ud5gG2A/download?&h=1280 // alias pyramids
- https://wallpaperaccess.com/full/8779679.jpg // alias rick
+ https://unsplash.com/photos/m35LirqP6y8/download?&h=1280
+ https://unsplash.com/photos/OVO8nK-7Rfs/download?&h=1280
+ https://unsplash.com/photos/PZMeVJwCTFM/download?&h=1280
+ https://unsplash.com/photos/2dp1Ud5gG2A/download?&h=1280
+ https://wallpaperaccess.com/full/8779679.jpg
 
+if functions are too long, extract in separate functions.
 
+wrap td of FAMILYNAME in a label for the hide checkbox
+wrap background td of URL in a label for the USE Radio
