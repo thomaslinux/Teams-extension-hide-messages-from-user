@@ -2,8 +2,11 @@
 
 An extension to hide messages from specific Teams users.
 Based on my userstyles :
+
 https://userstyles.world/style/26699/tl9-teams-hide-messages-from-user
+
 https://userstyles.world/style/26886
+
 https://userstyles.world/style/25421/tl9-teams-set-a-background-image-from-url
 
 Made with [help](prompt.txt) from [perplexity.ai](https://perplexity.ai)
@@ -117,3 +120,14 @@ Because we scroll conversations, I would need to run the logic for every scroll.
 - [ ] add a button next to the username to block that user
 
 - [ ] Insert buttons in the Teams interfaces on right click to add a user to hide, show currently hidden users
+
+# Userstyle / stylus version
+
+## V1 - Current
+- [x] set a background image
+- [x] hide a user from it's profile image select
+## V2 - Would be nice
+- [ ] Loop throught a users list : https://css-tricks.com/loops-css-preprocessors/
+- [ ] Add a user to the list throught the interface
+- [ ] Select a background from a dropdown menu
+- [ ] Add a background image to the list
