@@ -13,9 +13,9 @@ Made with [help](prompt.txt) from [perplexity.ai](https://perplexity.ai)
 
 # Screenshots V0
 
-| Firefox interface           | Chrome interface           |
-| --------------------------- | -------------------------- |
-| ![](firefox-screenshot.png) | ![](chrome-screenshot.png) |
+| Firefox interface                 | Chrome interface           |
+| --------------------------------- | -------------------------- |
+| ![](teams_hide_user_messages.jpg) | ![](chrome-screenshot.png) |
 
 ## Installation on Chrome
 
