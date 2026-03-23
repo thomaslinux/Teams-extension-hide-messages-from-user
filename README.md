@@ -45,11 +45,12 @@ drag and drop the mv2 folder in Firefox
 Go to `about:config` and set `xpinstall.signatures.required` to `false`
 
 zip the content of the mv2 folder, so the structure is
-
+```
 mv2
 |-manifest.json
 |-options.html
 |-...
+```
 
 manifest.json and others are at the root of the archive.
 
