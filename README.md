@@ -17,7 +17,10 @@ Made with [help](prompt.txt) from [perplexity.ai](https://perplexity.ai)
 | --------------------------- | -------------------------- |
 | ![](firefox-screenshot.png) | ![](chrome-screenshot.png) |
 
-![Interface with a user hidden and the background image changed](teams_hide_user_messages.jpg)
+
+| Interface with a user hidden and the background image changed |
+| --- |
+|![Interface with a user hidden and the background image changed](teams_hide_user_messages.jpg)|
 
 ## Installation on Chrome
 
