@@ -1,5 +1,7 @@
 # Extension to hide messages from specific Teams users
 
+Browser extension to hide messages from users, because you can't block people on Microsoft Teams (even if you hate them really much 🌹).
+
 An extension to hide messages from specific Teams users.
 Based on my userstyles :
 
